@@ -97,19 +97,18 @@ const HeroSection = () => (
         backgroundColor: '#f6f3fc',
         backgroundImage: 'url(/images/img_group_2609310.png)',
         backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        padding: '24px 16px',
-        minHeight: 300,       
+        backgroundPosition: 'center',    
         width: '100%',
     }}>
         <div style={{
         display: 'flex',
-        flexDirection: 'column',
         gap: 20,
         position: 'relative',
         zIndex: 2,
         maxWidth: 1222,
         margin: '0 auto',
+        alignItems: 'center',
+        justifyContent: 'center'
         }}>
             <div>
                 <h1 style={{
