@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import "@fontsource/montserrat/800.css";
 
 
 // ─── TYPES ────────────────────────────────────────────────────────────────────
@@ -87,6 +88,8 @@ const Header = () => (
     </header>
 )
 
+
+
 // ─── HERO SECTION ─────────────────────────────────────────────────────────────
 
 const HeroSection = () => (
@@ -95,16 +98,18 @@ const HeroSection = () => (
         backgroundImage: 'url(/images/img_group_2609310.png)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        padding: '0px 16px',
+        padding: '24px 16px',
+        minHeight: 300,       
         width: '100%',
     }}>
         <div style={{
-            display: 'flex',
-            gap: 20,
-            position: 'relative',
-            zIndex: 2,
-            maxWidth: 995,
-            margin: '0 auto',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 20,
+        position: 'relative',
+        zIndex: 2,
+        maxWidth: 1222,
+        margin: '0 auto',
         }}>
             <div>
                 <h1 style={{
@@ -127,7 +132,13 @@ const HeroSection = () => (
             <img
                 src="/images/img_ai_expand_pranav.png"
                 alt="Happy customer with perfect smile"
-                style={{ width: '100%', maxWidth: 266 }}
+                style={{ 
+                    width: '100%',
+                    maxWidth: 200,
+                    height: 'auto',   
+                    objectFit: 'contain',
+                    flexShrink: 0, 
+                }}
             />
         </div>
     </section>
@@ -310,6 +321,7 @@ const CloveSection = () => (
                 flexDirection: 'row',
                 gap: 16,
                 alignItems: 'center',
+                justifyContent: 'center',
                 marginBottom: 16,
             }}>
                 <p style={{ fontSize: 20, fontWeight: 600, textAlign: 'center', color: '#000' }}>
@@ -378,88 +390,88 @@ const ScrollingBanner = () => {
 // ─── DREAM SECTION ────────────────────────────────────────────────────────────
 
 const DreamSection = () => {
-  const width = useWindowWidth()
-  const isDesktop = width >= 768
+    const width = useWindowWidth()
+    const isDesktop = width >= 768
 
-  return (
-    <section style={{ backgroundColor: '#f0f9ff', padding: '48px 16px' }}>
-      <div style={{
-        display: 'flex',
-        flexDirection: isDesktop ? 'row' : 'column',
-        gap: 32,
-        maxWidth: 1440,
-        margin: '0 auto',
-        alignItems: isDesktop ? 'flex-start' : 'stretch',
-      }}>
+    return (
+        <section style={{ backgroundColor: '#f0f9ff', padding: '48px 16px' }}>
+            <div style={{
+                display: 'flex',
+                flexDirection: isDesktop ? 'row' : 'column',
+                gap: 32,
+                maxWidth: 1440,
+                margin: '0 auto',
+                alignItems: isDesktop ? 'flex-start' : 'stretch',
+            }}>
 
-        <div style={{ flex: 1 }}>
-          <h2 style={{
-            fontSize: 'clamp(28px, 4vw, 40px)',
-            fontFamily: "'Montserrat', sans-serif",
-            fontWeight: 800, lineHeight: 1.2,
-            color: '#171b1b', marginBottom: 32,
-          }}>
-            Dream smiles achieved secretly
-          </h2>
-          <p style={{ fontSize: 14, color: '#171b1b', lineHeight: 1.4, marginBottom: 16 }}>
-            Experience the superior quality of our Whistle Aligners crafted with 3-layer PU material.
-            With 450+ clinics nationwide, enjoy comfortable treatment by expert orthodontists at House of Clove.
-          </p>
+                <div style={{ flex: 1 }}>
+                    <h2 style={{
+                        fontSize: 'clamp(28px, 4vw, 40px)',
+                        fontFamily: "'Montserrat', sans-serif",
+                        fontWeight: 800, lineHeight: 1.2,
+                        color: '#171b1b', marginBottom: 32,
+                    }}>
+                        Dream smiles achieved secretly
+                    </h2>
+                    <p style={{ fontSize: 14, color: '#171b1b', lineHeight: 1.4, marginBottom: 16 }}>
+                        Experience the superior quality of our Whistle Aligners crafted with 3-layer PU material.
+                        With 450+ clinics nationwide, enjoy comfortable treatment by expert orthodontists at House of Clove.
+                    </p>
 
-          {isDesktop && (
-            <p style={{ fontSize: 14, color: '#171b1b', lineHeight: 1.4 }}>
-              The pricing is different for every case. Cases with higher complexity requiring more aligners
-              and additional time and effort from our dentists.
-            </p>
-          )}
-        </div>
+                    {isDesktop && (
+                        <p style={{ fontSize: 14, color: '#171b1b', lineHeight: 1.4 }}>
+                            The pricing is different for every case. Cases with higher complexity requiring more aligners
+                            and additional time and effort from our dentists.
+                        </p>
+                    )}
+                </div>
 
-        <div style={{
-          backgroundColor: '#fff', borderRadius: 16,
-          padding: 22, boxShadow: '0px 2px 20px rgba(222,226,226,0.7)',
-          width: isDesktop ? 380 : '100%',
-          flexShrink: 0,
-        }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 24 }}>
-            <h3 style={{ fontSize: 20, fontFamily: "'Montserrat', sans-serif", fontWeight: 800, color: '#2f3636' }}>
-              Whistle Aligners
-            </h3>
-            <img src="/images/img_image_3.png" alt="Whistle Aligners" style={{ width: 80 }} />
-          </div>
-          <p style={{ fontSize: 14, textDecoration: 'line-through', color: '#2f3636', marginBottom: 4 }}>₹84,000</p>
-          <div style={{ display: 'flex', alignItems: 'flex-end', gap: 8, marginBottom: 4 }}>
-            <span style={{ fontSize: 14, color: '#2f3636' }}>starting at</span>
-            <span style={{ fontSize: 20, fontWeight: 700, color: '#8f62d4' }}>₹47,999</span>
-          </div>
-          <p style={{ fontSize: 12, color: '#768888', marginBottom: 24 }}>inc. of all taxes</p>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-            {['Offer valid for a limited time', 'Easy financing options'].map((f, i) => (
-              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <img src="/images/img_svg_margin.svg" alt="✓" style={{ width: 18, height: 20, flexShrink: 0 }} />
-                <span style={{ fontSize: 13, color: '#171b1b' }}>{f}</span>
-              </div>
-            ))}
-          </div>
-          <a href="#" style={{
-            display: 'flex', alignItems: 'center', gap: 10,
-            color: '#8f62d4', fontSize: 16, fontWeight: 600,
-            textDecoration: 'none', marginTop: 16,
-          }}>
-            Learn more
-            <img src="/images/img_arrow_right.svg" alt="→" style={{ width: 24, height: 24 }} />
-          </a>
-        </div>
+                <div style={{
+                    backgroundColor: '#fff', borderRadius: 16,
+                    padding: 22, boxShadow: '0px 2px 20px rgba(222,226,226,0.7)',
+                    width: isDesktop ? 380 : '100%',
+                    flexShrink: 0,
+                }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 24 }}>
+                        <h3 style={{ fontSize: 20, fontFamily: "'Montserrat', sans-serif", fontWeight: 800, color: '#2f3636' }}>
+                            Whistle Aligners
+                        </h3>
+                        <img src="/images/img_image_3.png" alt="Whistle Aligners" style={{ width: 80 }} />
+                    </div>
+                    <p style={{ fontSize: 14, textDecoration: 'line-through', color: '#2f3636', marginBottom: 4 }}>₹84,000</p>
+                    <div style={{ display: 'flex', alignItems: 'flex-end', gap: 8, marginBottom: 4 }}>
+                        <span style={{ fontSize: 14, color: '#2f3636' }}>starting at</span>
+                        <span style={{ fontSize: 20, fontWeight: 700, color: '#8f62d4' }}>₹47,999</span>
+                    </div>
+                    <p style={{ fontSize: 12, color: '#768888', marginBottom: 24 }}>inc. of all taxes</p>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                        {['Offer valid for a limited time', 'Easy financing options'].map((f, i) => (
+                            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                                <img src="/images/img_svg_margin.svg" alt="✓" style={{ width: 18, height: 20, flexShrink: 0 }} />
+                                <span style={{ fontSize: 13, color: '#171b1b' }}>{f}</span>
+                            </div>
+                        ))}
+                    </div>
+                    <a href="#" style={{
+                        display: 'flex', alignItems: 'center', gap: 10,
+                        color: '#8f62d4', fontSize: 16, fontWeight: 600,
+                        textDecoration: 'none', marginTop: 16,
+                    }}>
+                        Learn more
+                        <img src="/images/img_arrow_right.svg" alt="→" style={{ width: 24, height: 24 }} />
+                    </a>
+                </div>
 
-        {!isDesktop && (
-          <p style={{ fontSize: 14, color: '#171b1b', lineHeight: 1.4 }}>
-            The pricing is different for every case. Cases with higher complexity requiring more aligners
-            and additional time and effort from our dentists.
-          </p>
-        )}
+                {!isDesktop && (
+                    <p style={{ fontSize: 14, color: '#171b1b', lineHeight: 1.4 }}>
+                        The pricing is different for every case. Cases with higher complexity requiring more aligners
+                        and additional time and effort from our dentists.
+                    </p>
+                )}
 
-      </div>
-    </section>
-  )
+            </div>
+        </section>
+    )
 }
 
 // ─── RESULTS SECTION ──────────────────────────────────────────────────────────
@@ -481,13 +493,28 @@ const ResultsSection = () => (
         }}>
             Results You'll Love
         </h2>
+
+        {/* ← Horizontal scroll container */}
         <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
+            display: 'flex',
+            flexDirection: 'row',
             gap: 16,
+            overflowX: 'auto',
+            paddingBottom: 12,
+            scrollSnapType: 'x mandatory',
+            WebkitOverflowScrolling: 'touch',
+            alignContent: 'center',
+            justifyContent: 'center'
         }}>
             {resultCards.map((card, i) => (
-                <div key={i} style={{ backgroundColor: '#f0f9ff', borderRadius: 8, padding: 8 }}>
+                <div key={i} style={{
+                    backgroundColor: '#f0f9ff',
+                    borderRadius: 8,
+                    padding: 8,
+                    minWidth: 220,
+                    flexShrink: 0,
+                    scrollSnapAlign: 'start',
+                }}>
                     <div style={{ display: 'flex', gap: 4, marginBottom: 4 }}>
                         <img src={`/images/${card.beforeImg}`} alt="Before" style={{ width: '50%', borderRadius: 2 }} />
                         <img src={`/images/${card.afterImg}`} alt="After" style={{ width: '50%', borderRadius: 2 }} />
@@ -536,17 +563,31 @@ const WhyWhistleSection = () => (
             Why Whistle?
         </h2>
         <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
+            display: 'flex',
+            flexDirection: 'row',
             gap: 24,
+            overflowX: 'auto',
+            paddingBottom: 12,
+            scrollSnapType: 'x mandatory',
+            WebkitOverflowScrolling: 'touch',
+            alignItems: 'center',
+            justifyContent: 'center'
         }}>
             {whyCards.map((card, i) => (
-                <div key={i} style={{ backgroundColor: '#f0f9ff', borderRadius: 16, overflow: 'hidden' }}>
-                    <div style={{ position: 'relative', width: '100%', paddingTop: '75%', backgroundColor: '#cff0c4' }}>
+                <div key={i} style={{ 
+                    backgroundColor: '#f0f9ff', 
+                    borderRadius: 16, 
+                    overflow: 'hidden',
+                    minWidth: 220,
+                    maxWidth: 280, 
+                    flexShrink: 0,
+                    scrollSnapAlign: 'start', 
+                    }}>
+                    <div style={{ position: 'relative', width: '100%', height: 180, backgroundColor: '#cff0c4' }}>
                         <img
                             src={`/images/${card.img}`}
                             alt={card.title}
-                            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+                            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover',objectPosition: 'center top' }}
                         />
                     </div>
                     <div style={{ padding: 16 }}>
@@ -568,31 +609,84 @@ const differenceItems: DifferenceItem[] = [
 ]
 
 const DifferenceSection = () => (
-    <section style={{ padding: '48px 16px', marginTop: 48 }}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 32, maxWidth: 1440, margin: '0 auto' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+    <section style={{ 
+        padding: '48px 24px', 
+        background: '#ddeaf7',
+    }}>
+        <div style={{ 
+            maxWidth: 900, 
+            margin: '0 auto',
+            display: 'flex',
+            flexDirection: 'row',
+            gap: 16,
+            alignItems: 'stretch',
+        }}>
+            {/* LEFT CARD: white content card */}
+            <div style={{ 
+                flex: '0 0 52%',
+                padding: '40px 36px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 28,
+                background: '#ffffff',
+                borderRadius: 20,
+            }}>
                 <h2 style={{
-                    fontSize: 'clamp(28px, 4vw, 40px)',
+                    fontSize: 'clamp(22px, 3vw, 32px)',
                     fontFamily: "'Montserrat', sans-serif",
-                    fontWeight: 800, textAlign: 'center', color: '#171b1b',
+                    fontWeight: 800,
+                    color: '#171b1b',
+                    margin: 0,
                 }}>
                     The Whistle Difference
                 </h2>
+
                 {differenceItems.map((item, i) => (
-                    <div key={i} style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
-                        <img src={`/images/${item.icon}`} alt={item.title} style={{ width: 60, flexShrink: 0 }} />
+                    <div key={i} style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
+                        <img 
+                            src={`/images/${item.icon}`} 
+                            alt={item.title} 
+                            style={{ width: 48, height: 48, flexShrink: 0 }} 
+                        />
                         <div>
-                            <h3 style={{ fontSize: 18, fontWeight: 700, color: '#2f3636', marginBottom: 8 }}>{item.title}</h3>
-                            <p style={{ fontSize: 14, lineHeight: 1.4, color: '#171b1b' }}>{item.description}</p>
+                            <h3 style={{ 
+                                fontSize: 15, 
+                                fontWeight: 700, 
+                                color: '#2f3636', 
+                                margin: '0 0 5px 0',
+                            }}>
+                                {item.title}
+                            </h3>
+                            <p style={{ 
+                                fontSize: 13, 
+                                lineHeight: 1.5, 
+                                color: '#444',
+                                margin: 0,
+                            }}>
+                                {item.description}
+                            </p>
                         </div>
                     </div>
                 ))}
             </div>
-            <img
-                src="/images/img_whatsapp_image_2024_02_13.png"
-                alt="Whistle Aligners showcase"
-                style={{ width: '100%', borderRadius: 16 }}
-            />
+
+            {/* RIGHT CARD: image card */}
+            <div style={{ 
+                flex: 1,
+                borderRadius: 20,
+                overflow: 'hidden',
+            }}>
+                <img
+                    src="/images/img_whatsapp_image_2024_02_13.png"
+                    alt="Whistle Aligners showcase"
+                    style={{ 
+                        width: '100%', 
+                        height: '100%',
+                        objectFit: 'cover',
+                        display: 'block',
+                    }}
+                />
+            </div>
         </div>
     </section>
 )
@@ -617,52 +711,115 @@ const ComparisonSection = () => (
         }}>
             What sets Whistle apart?
         </h2>
+
         <div style={{
             maxWidth: 900, margin: '0 auto',
             backgroundColor: '#fff', border: '1px solid #e6e6e6',
             borderRadius: 16, overflow: 'hidden',
         }}>
-            {/* Header */}
-            <div style={{ display: 'grid', gridTemplateColumns: '2fr 3fr', padding: 16 }}>
-                <div style={{ padding: '0 16px' }}>
-                    <h3 style={{ fontSize: 18, fontWeight: 700, color: '#000' }}>Features</h3>
+
+            {/* ── HEADER ROW ── */}
+            <div style={{ 
+                display: 'grid', 
+                gridTemplateColumns: '2fr 1fr 1fr',
+                borderBottom: '1px solid #e6e6e6',
+            }}>
+                {/* Features label */}
+                <div style={{ 
+                    padding: '16px 20px', 
+                    display: 'flex', 
+                    alignItems: 'center' 
+                }}>
+                    <span style={{ fontSize: 14, fontWeight: 700, color: '#000' }}>Features</span>
                 </div>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, alignItems: 'center' }}>
-                    <div style={{ backgroundColor: '#f0f9ff', padding: 14, textAlign: 'center' }}>
-                        <img src="/images/img_image_1.png" alt="Whistle" style={{ width: 80, margin: '0 auto' }} />
-                    </div>
-                    <p style={{ fontSize: 14, fontWeight: 700, textAlign: 'center', color: '#1e1e1e' }}>Other Brands</p>
+
+                {/* Whistle header — light blue bg */}
+                <div style={{ 
+                    backgroundColor: '#eaf4fd', 
+                    padding: '16px 12px', 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: 'center',
+                }}>
+                    <img 
+                        src="/images/img_image_1.png" 
+                        alt="Whistle" 
+                        style={{ width: 72, objectFit: 'contain' }} 
+                    />
+                </div>
+
+                {/* Other Brands header */}
+                <div style={{ 
+                    padding: '16px 12px', 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: 'center' 
+                }}>
+                    <span style={{ fontSize: 13, fontWeight: 700, color: '#1e1e1e', textAlign: 'center' }}>
+                        Other Brands
+                    </span>
                 </div>
             </div>
 
-            {/* Rows */}
+            {/* ── DATA ROWS ── */}
             {comparisonRows.map((row, i) => (
                 <div key={i} style={{
-                    display: 'grid', gridTemplateColumns: '2fr 3fr',
-                    backgroundColor: '#fff', borderRadius: 8, marginBottom: 8,
+                    display: 'grid', 
+                    gridTemplateColumns: '2fr 1fr 1fr',
+                    borderBottom: i < comparisonRows.length - 1 ? '1px solid #e6e6e6' : 'none',
                 }}>
-                    <div style={{ padding: 16, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <span style={{ fontSize: 14, fontWeight: 500, color: '#000' }}>{row.feature}</span>
-                        <img src="/images/img_frame_2609671_black_900.svg" alt="Expand" style={{ width: 16, height: 16 }} />
+                    {/* Feature name + chevron */}
+                    <div style={{ 
+                        padding: '18px 20px', 
+                        display: 'flex', 
+                        justifyContent: 'space-between', 
+                        alignItems: 'center',
+                    }}>
+                        <span style={{ fontSize: 13, fontWeight: 500, color: '#000' }}>
+                            {row.feature}
+                        </span>
+                        <img 
+                            src="/images/img_frame_2609671_black_900.svg" 
+                            alt="Expand" 
+                            style={{ width: 14, height: 14, opacity: 0.5 }} 
+                        />
                     </div>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, padding: '16px 8px' }}>
-                        {/* Whistle Value */}
-                        <div style={{
-                            textAlign: 'center', fontSize: 14, fontWeight: 500, color: '#000',
-                            backgroundColor: '#f0f9ff', padding: 16, borderRadius: 4,
-                        }}>
-                            {row.whistleValue === 'check' ? (
-                                <img src="/images/img_frame_2609477.svg" alt="Yes" style={{ width: 40, height: 40, margin: '0 auto' }} />
-                            ) : row.whistleValue}
-                        </div>
-                        {/* Other Value */}
-                        <div style={{ textAlign: 'center', fontSize: 14, fontWeight: 500, color: '#000' }}>
-                            {row.otherValue === 'cross' ? (
-                                <img src="/images/img_frame_2609477_red_700.svg" alt="No" style={{ width: 40, height: 40, margin: '0 auto' }} />
-                            ) : row.otherValue === 'maybe' ? (
-                                <img src="/images/img_vector.svg" alt="Maybe" style={{ width: 24, height: 24, margin: '0 auto' }} />
-                            ) : row.otherValue}
-                        </div>
+
+                    {/* Whistle value — always light blue bg */}
+                    <div style={{
+                        backgroundColor: '#eaf4fd',
+                        padding: '14px 12px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}>
+                        {row.whistleValue === 'check' ? (
+                            <img 
+                                src="/images/img_frame_2609477.svg" 
+                                alt="Yes" 
+                                style={{ width: 32, height: 32 }} 
+                            />
+                        ) : (
+                            <span style={{ fontSize: 12, fontWeight: 500, color: '#000', textAlign: 'center', lineHeight: 1.4 }}>
+                                {row.whistleValue}
+                            </span>
+                        )}
+                    </div>
+
+                    {/* Other Brands value */}
+                    <div style={{ 
+                        padding: '14px 12px', 
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        justifyContent: 'center' 
+                    }}>
+
+                    <img 
+                        src="/images/img_frame_2609477_red_700.svg" 
+                        alt="No" 
+                        style={{ width: 32, height: 32 }} 
+                    />
+
                     </div>
                 </div>
             ))}
@@ -680,68 +837,145 @@ const steps: Step[] = [
 ]
 
 const StepsSection = () => (
-    <section style={{ backgroundColor: '#f0f9ff', padding: '48px 16px', marginTop: 48 }}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 32, maxWidth: 1440, margin: '0 auto' }}>
-            <div>
+    <section style={{ 
+        backgroundColor: '#f0f9ff',  // light blue outer bg
+        padding: '48px 24px',
+    }}>
+        {/* White rounded card wrapping everything */}
+        <div style={{ 
+            maxWidth: 900, 
+            margin: '0 auto',
+            backgroundColor: '#ffffff',
+            borderRadius: 20,
+            padding: '40px 36px',
+            display: 'flex', 
+            flexDirection: 'row', 
+            gap: 40, 
+            alignItems: 'center',
+        }}>
+            {/* LEFT: heading + 2x2 steps grid */}
+            <div style={{ flex: '0 0 50%' }}>
                 <h2 style={{
-                    fontSize: 'clamp(28px, 4vw, 40px)',
+                    fontSize: 'clamp(22px, 3vw, 32px)',
                     fontFamily: "'Montserrat', sans-serif",
-                    fontWeight: 800, color: '#171b1b', marginBottom: 32,
+                    fontWeight: 800, 
+                    color: '#171b1b', 
+                    marginBottom: 32,
+                    marginTop: 0,
+                    lineHeight: 1.2,
                 }}>
                     Get your perfect smile in four simple steps
                 </h2>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 24 }}>
+
+                {/* Fixed 2x2 grid */}
+                <div style={{ 
+                    display: 'grid', 
+                    gridTemplateColumns: '1fr 1fr',
+                    gap: 28,
+                }}>
                     {steps.map((step) => (
-                        <div key={step.number} style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
+                        <div key={step.number} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
                             <div style={{
-                                width: 52, height: 52, backgroundColor: '#c7e0f2',
-                                borderRadius: 26, display: 'flex', alignItems: 'center',
-                                justifyContent: 'center', flexShrink: 0,
+                                width: 48, height: 48, 
+                                backgroundColor: '#c7e0f2',
+                                borderRadius: '50%', 
+                                display: 'flex', 
+                                alignItems: 'center',
+                                justifyContent: 'center', 
+                                flexShrink: 0,
                             }}>
                                 <div style={{
-                                    width: 40, height: 40, backgroundColor: '#fff',
-                                    borderRadius: 20, display: 'flex', alignItems: 'center',
-                                    justifyContent: 'center', fontSize: 20, fontWeight: 700, color: '#171b1b',
+                                    width: 36, height: 36, 
+                                    backgroundColor: '#fff',
+                                    borderRadius: '50%', 
+                                    display: 'flex', 
+                                    alignItems: 'center',
+                                    justifyContent: 'center', 
+                                    fontSize: 18, 
+                                    fontWeight: 700, 
+                                    color: '#171b1b',
                                 }}>
                                     {step.number}
                                 </div>
                             </div>
                             <div>
-                                <h3 style={{ fontSize: 16, fontWeight: 700, color: '#171b1b', marginBottom: 4 }}>{step.title}</h3>
-                                <p style={{ fontSize: 14, lineHeight: 1.4, color: '#171b1b' }}>{step.description}</p>
+                                <h3 style={{ 
+                                    fontSize: 14, 
+                                    fontWeight: 700, 
+                                    color: '#171b1b', 
+                                    marginBottom: 4,
+                                    marginTop: 0,
+                                }}>
+                                    {step.title}
+                                </h3>
+                                <p style={{ 
+                                    fontSize: 12, 
+                                    lineHeight: 1.5, 
+                                    color: '#444',
+                                    margin: 0,
+                                }}>
+                                    {step.description}
+                                </p>
                             </div>
                         </div>
                     ))}
                 </div>
             </div>
 
-            {/* Video Thumbnail */}
-            <div style={{ position: 'relative', width: '100%', borderRadius: 8, overflow: 'hidden' }}>
-                <img src="/images/img_screenshot_20240216_122938.png" alt="Treatment video" style={{ width: '100%', borderRadius: 8 }} />
+            {/* RIGHT: video with purple border */}
+            <div style={{ 
+                flex: 1,
+                borderRadius: 16,
+                overflow: 'hidden',
+                border: '3px solid #7c3aed',
+                position: 'relative',
+            }}>
+                <img 
+                    src="/images/img_screenshot_20240216_122938.png" 
+                    alt="Treatment video" 
+                    style={{ 
+                        width: '100%', 
+                        height: '100%',
+                        objectFit: 'cover',
+                        display: 'block',
+                    }} 
+                />
                 <button
                     aria-label="Play video"
                     style={{
-                        position: 'absolute', top: '50%', left: '50%',
+                        position: 'absolute', 
+                        top: '50%', 
+                        left: '50%',
                         transform: 'translate(-50%, -50%)',
-                        width: 60, height: 60,
-                        backgroundColor: 'rgba(255,255,255,0.3)',
-                        border: '2px solid #fff', borderRadius: 40,
-                        padding: 20, cursor: 'pointer',
+                        width: 56, 
+                        height: 56,
+                        backgroundColor: 'rgba(255,255,255,0.25)',
+                        backdropFilter: 'blur(4px)',
+                        border: '2px solid #fff', 
+                        borderRadius: '50%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        cursor: 'pointer',
+                        padding: 0,
                     }}
                 >
-                    <img src="/images/img_polygon_3.svg" alt="Play" style={{ width: '100%', height: '100%' }} />
+                    <img 
+                        src="/images/img_polygon_3.svg" 
+                        alt="Play" 
+                        style={{ width: 20, height: 20, marginLeft: 3 }}
+                    />
                 </button>
             </div>
         </div>
     </section>
 )
-
 // ─── DOCTOR SECTION ───────────────────────────────────────────────────────────
 
 const DoctorSection = () => (
-    <section style={{ backgroundColor: '#f0f9ff', padding: '48px 16px' }}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 32, maxWidth: 1440, margin: '0 auto' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+    <section style={{ backgroundColor: '#f0f9ff', padding: '0px 16px' }}>
+        <div style={{ display: 'flex', flexDirection: 'row', gap: 32, maxWidth: 1440, margin: '0 auto' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 32, justifyContent: 'center' }}>
                 <h2 style={{
                     fontSize: 'clamp(28px, 4vw, 40px)',
                     fontFamily: "'Montserrat', sans-serif",
@@ -755,7 +989,7 @@ const DoctorSection = () => (
                 </p>
                 <button
                     style={{
-                        padding: '14px 34px', backgroundColor: '#8f62d4',
+                        padding: '14px 90px', backgroundColor: '#8f62d4',
                         color: '#fff', fontSize: 16, fontWeight: 600,
                         borderRadius: 8, border: 'none', cursor: 'pointer',
                         width: 'fit-content', transition: 'background-color 0.3s',
@@ -769,7 +1003,7 @@ const DoctorSection = () => (
             <img
                 src="/images/img_rectangle_3022.png"
                 alt="Professional orthodontist"
-                style={{ width: '100%', borderRadius: 8 }}
+                style={{ width: '100%'}}
             />
         </div>
     </section>
@@ -858,7 +1092,7 @@ const FooterSection = () => {
 
     return (
         <footer style={{ backgroundColor: '#171b1b', padding: '48px 16px', marginTop: 48 }}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 32, maxWidth: 1440, margin: '0 auto' }}>
+            <div style={{ display: 'flex', flexDirection: 'row', gap: 280, maxWidth: 1440, margin: '0 auto' }}>
                 {/* Quick Links */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
                     <h3 style={{ fontSize: 20, fontWeight: 700, color: '#fff', marginBottom: 12 }}>Quick Links</h3>
@@ -924,11 +1158,11 @@ const StickyCTA = () => (
         backgroundColor: '#fff', boxShadow: '0px 0px 12px rgba(0,0,0,0.2)',
         padding: '12px 16px', zIndex: 100,
     }}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 12, alignItems: 'center' }}>
-            <p style={{ fontSize: 14, fontWeight: 600, color: '#2f3636', textAlign: 'center' }}>
+        <div style={{ display: 'flex', flexDirection: 'row', gap: 467, alignItems: 'center' }}>
+            <p style={{ fontSize: 14, fontWeight: 600, color: '#2f3636', textAlign: 'center', whiteSpace: 'nowrap' }}>
                 Ready for your perfect smile?
             </p>
-            <div style={{ display: 'flex', gap: 12, width: '100%' }}>
+            <div style={{ display: 'flex', gap: 60, width: '100%',padding:'0 100' }}>
                 <button style={{
                     flex: 1, padding: '12px 24px', backgroundColor: '#8f62d4',
                     color: '#fff', fontSize: 14, fontWeight: 600,
