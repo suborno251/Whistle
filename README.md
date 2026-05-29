@@ -1,58 +1,253 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Whistle Aligners [ Landing Page ]
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A full-stack landing page for **Whistle Aligners**, a teeth alignment product by Clove Dental. Built with **Laravel** as the backend framework and **React (TypeScript)** as the frontend, powered by **Vite**.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Tech Stack
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+| Layer | Technology |
+|---|---|
+| Backend | Laravel 13 (PHP 8.5) |
+| Frontend | React 19 + TypeScript |
+| Build Tool | Vite |
+| Styling | Raw CSS via inline styles |
+| Routing | React Router DOM |
+| Package Manager | npm + Composer |
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## Project Structure
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
-```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+```
+whistle/
+├── app/                        # Laravel application logic
+├── bootstrap/                  # Laravel bootstrap files
+├── config/                     # Laravel configuration
+├── database/                   # Migrations and seeders
+├── public/                     # Publicly accessible files
+│   └── images/                 # All static assets (PNG, SVG)
+├── resources/
+│   ├── js/
+│   │   ├── app.tsx                 # React entry point
+│   │   ├── components/
+│   │   │   └── App.tsx             # Root React component
+│   │   ├── hooks/                  # Custom React hooks (e.g. useWindowWidth)
+│   │   ├── layouts/
+│   │   │   ├── header.tsx          # Site header with logo & promo banner
+│   │   │   └── footer.tsx          # Site footer with links & socials
+│   │   ├── lib/                    # Utility/helper functions
+│   │   ├── pages/
+│   │   │   └── Home.tsx            # Main landing page
+│   │   ├── routes/
+│   │   │   └── index.tsx           # React Router route definitions
+│   │   └── types/
+│   │       └── global.d.ts         # Global TypeScript type declarations
+│   └── views/
+│       └── app.blade.php           # Laravel Blade shell (boots React)
+├── routes/
+│   └── web.php                 # Laravel catch-all route
+├── vite.config.js              # Vite + React plugin config
+├── tsconfig.json               # TypeScript config
+├── package.json
+└── composer.json
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+---
 
-## Contributing
+## Setup & Installation
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Prerequisites
 
-## Code of Conduct
+Make sure you have the following installed:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- PHP >= 8.2
+- Composer
+- Node.js >= 18
+- npm
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 1. Clone the Repository
 
-## License
+```bash
+git clone https://github.com/suborno251/Whistle.git
+cd Whistle
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 2. Install PHP Dependencies
+
+```bash
+composer install
+```
+
+### 3. Install Node Dependencies
+
+```bash
+npm install
+```
+
+### 4. Environment Setup
+
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+### 5. Run the Development Servers
+
+You need **two terminals** running simultaneously:
+
+```bash
+# Terminal 1 — Laravel
+php artisan serve
+
+# Terminal 2 — Vite (React)
+npm run dev
+```
+
+Visit: [http://127.0.0.1:8000](http://127.0.0.1:8000)
+
+---
+
+## How It Works
+
+### Laravel as Backend Shell
+
+Laravel serves a single Blade view (`app.blade.php`) that acts as the HTML shell for the React app:
+
+```php
+// routes/web.php
+Route::get('/{any}', function () {
+    return view('app');
+})->where('any', '.*');
+```
+
+```html
+<!-- resources/views/app.blade.php -->
+<!DOCTYPE html>
+<html>
+<head>
+    @viteReactRefresh
+    @vite(['resources/js/app.tsx'])
+</head>
+<body>
+    <div id="app"></div>
+</body>
+</html>
+```
+
+### React Takes Over
+
+React mounts into `<div id="app">` and React Router handles all frontend navigation:
+
+```tsx
+// resources/js/app.tsx
+ReactDOM.createRoot(document.getElementById('app')!).render(
+    <React.StrictMode>
+        <App />
+    </React.StrictMode>
+)
+```
+
+### Responsive Layout
+
+Since the project uses raw inline CSS (no Tailwind), responsiveness is handled via a custom `useWindowWidth` hook:
+
+```tsx
+const useWindowWidth = () => {
+    const [width, setWidth] = useState(window.innerWidth)
+    useEffect(() => {
+        const handleResize = () => setWidth(window.innerWidth)
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
+    }, [])
+    return width
+}
+```
+
+This allows conditional layout changes based on screen width:
+
+```tsx
+const isDesktop = width >= 768
+
+<div style={{
+    flexDirection: isDesktop ? 'row' : 'column'
+}}>
+```
+
+---
+
+## Development Workflow
+
+```
+Figma Design
+     ↓
+Rocket.io (Figma → HTML conversion)
+     ↓
+Manual HTML/CSS cleanup & fixes
+     ↓
+Convert HTML sections → React components (TSX)
+     ↓
+Add responsiveness via useWindowWidth hook
+     ↓
+Wire up React Router + Laravel catch-all route
+     ↓
+Static assets exported from Rocket.io → public/images/
+```
+
+---
+
+## Key Pages & Components
+
+| File | Description |
+|---|---|
+| `resources/js/app.tsx` | React DOM entry point |
+| `resources/js/components/App.tsx` | Root component, renders RouterProvider |
+| `resources/js/layouts/header.tsx` | Site header with logo and promo banner |
+| `resources/js/layouts/footer.tsx` | Footer with links, contact and socials |
+| `resources/js/pages/Home.tsx` | Full landing page with all sections |
+| `resources/js/routes/index.tsx` | React Router route definitions |
+| `resources/js/types/global.d.ts` | Global TypeScript declarations |
+| `resources/views/app.blade.php` | Blade shell that boots React |
+| `routes/web.php` | Laravel catch-all route |
+| `vite.config.js` | Vite config with Laravel + React plugins |
+
+---
+
+## Production Build
+
+```bash
+npm run build
+php artisan optimize
+```
+
+This compiles React into `public/build/` — no Vite server needed in production.
+
+---
+
+## 📦 Dependencies
+
+### PHP (Composer)
+- `laravel/framework` — Core Laravel framework
+
+### JavaScript (npm)
+- `react` + `react-dom` — UI library
+- `react-router-dom` — Client-side routing
+- `typescript` — Type safety
+- `@vitejs/plugin-react` — Vite React plugin
+- `laravel-vite-plugin` — Laravel + Vite integration
+
+---
+
+## Notes
+
+- The project uses **TypeScript** (`.tsx`) throughout the frontend.
+- Styling is done entirely with **inline CSS** (`style={{}}`) — no Tailwind or external CSS frameworks.
+- The `useWindowWidth` hook is the primary mechanism for responsive breakpoints.
+
+---
+
+## Author
+
+**Suborno** — [@suborno251](https://github.com/suborno251)
