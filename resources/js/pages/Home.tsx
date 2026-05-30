@@ -1241,35 +1241,69 @@ const FAQSection = () => {
 
 // ─── STICKY CTA ───────────────────────────────────────────────────────────────
 
-const StickyCTA = () => (
-    <div style={{
-        position: 'fixed', bottom: 0, left: 0, right: 0,
-        backgroundColor: '#fff', boxShadow: '0px 0px 12px rgba(0,0,0,0.2)',
-        padding: '12px 16px', zIndex: 100,
-    }}>
-        <div style={{ display: 'flex', flexDirection: 'row', gap: 467, alignItems: 'center' }}>
-            <p style={{ fontSize: 14, fontWeight: 600, color: '#2f3636', textAlign: 'center', whiteSpace: 'nowrap' }}>
-                Ready for your perfect smile?
-            </p>
-            <div style={{ display: 'flex', gap: 60, width: '100%',padding:'0 100' }}>
-                <button style={{
-                    flex: 1, padding: '12px 24px', backgroundColor: '#8f62d4',
-                    color: '#fff', fontSize: 14, fontWeight: 600,
-                    borderRadius: 8, border: 'none', cursor: 'pointer',
+const StickyCTA = () => {
+    const width = useWindowWidth()
+    const isMobile = width < 768
+
+    if (isMobile) return null
+
+    return (
+        <div style={{
+            position: 'fixed', bottom: 0, left: 0, right: 0,
+            backgroundColor: '#fff', boxShadow: '0px 0px 12px rgba(0,0,0,0.2)',
+            padding: '12px 40px', 
+            zIndex: 100,
+        }}>
+            <div style={{ 
+                display: 'flex', 
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                maxWidth: 1440,
+                margin: '0 auto',
+            }}>
+                <p style={{ 
+                    fontSize: 14, 
+                    fontWeight: 600, 
+                    color: '#2f3636', 
+                    whiteSpace: 'nowrap',
+                    margin: 0,
                 }}>
-                    Book scan at Home
-                </button>
-                <button style={{
-                    flex: 1, padding: '12px 24px', backgroundColor: '#f6f3fc',
-                    color: '#171b1b', fontSize: 14, fontWeight: 600,
-                    border: '1px solid #c8d0d0', borderRadius: 8, cursor: 'pointer',
-                }}>
-                    Book scan at Clinic
-                </button>
+                    Ready for your perfect smile?
+                </p>
+
+                <div style={{ display: 'flex', gap: 16 }}>
+                    <button style={{
+                        padding: '12px 24px', 
+                        backgroundColor: '#8f62d4',
+                        color: '#fff', 
+                        fontSize: 14, 
+                        fontWeight: 600,
+                        borderRadius: 8, 
+                        border: 'none', 
+                        cursor: 'pointer',
+                        whiteSpace: 'nowrap',
+                    }}>
+                        Book scan at Home
+                    </button>
+                    <button style={{
+                        padding: '12px 24px', 
+                        backgroundColor: '#f6f3fc',
+                        color: '#171b1b', 
+                        fontSize: 14, 
+                        fontWeight: 600,
+                        border: '1px solid #c8d0d0', 
+                        borderRadius: 8, 
+                        cursor: 'pointer',
+                        whiteSpace: 'nowrap',
+                    }}>
+                        Book scan at Clinic
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
-)
+    )
+}
 
 // ─── MAIN PAGE ────────────────────────────────────────────────────────────────
 
