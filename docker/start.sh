@@ -30,6 +30,9 @@ php artisan config:cache
 php artisan route:cache
 php artisan view:cache
 
+# Start scheduler in background
+php artisan schedule:work &
+
 # Start PHP-FPM in background
 php-fpm &
 
