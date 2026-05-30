@@ -1,15 +1,6 @@
 import { useState, useEffect } from 'react'
+import { useWindowWidth } from '../hooks/helpers'
 
-// ─── WINDOW WIDTH ───────────────────────────────────────────────────────────────────
-const useWindowWidth = () => {
-    const [width, setWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 0)
-    useEffect(() => {
-        const handleResize = () => setWidth(window.innerWidth)
-        window.addEventListener('resize', handleResize)
-        return () => window.removeEventListener('resize', handleResize)
-    }, [])
-    return width
-}
 export const FooterSection = () => {
     const width = useWindowWidth()
     const isMobile = width < 768

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useWindowWidth } from "../hooks/helpers";
 import "@fontsource/montserrat/800.css";
 import { Header } from '../layouts/header';
 import { FooterSection } from '../layouts/footer';
@@ -39,30 +40,6 @@ interface DifferenceItem {
     icon: string
     title: string
     description: string
-}
-
-// ─── WINDOW WIDTH ───────────────────────────────────────────────────────────────────
-const useWindowWidth = () => {
-    const [width, setWidth] = useState(() => {
-        if (typeof window === 'undefined') return 0
-        return window.visualViewport?.width ?? window.innerWidth
-    })
-
-    useEffect(() => {
-        const handleResize = () => {
-            setWidth(window.visualViewport?.width ?? window.innerWidth)
-        }
-
-        window.addEventListener('resize', handleResize)
-        window.visualViewport?.addEventListener('resize', handleResize)
-
-        return () => {
-            window.removeEventListener('resize', handleResize)
-            window.visualViewport?.removeEventListener('resize', handleResize)
-        }
-    }, [])
-
-    return width
 }
 
 // ─── HERO SECTION ─────────────────────────────────────────────────────────────
