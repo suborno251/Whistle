@@ -865,178 +865,304 @@ const steps: Step[] = [
     { number: 4, title: 'Wear', description: 'Your Whistle Aligners and expert Clove Dental Orthodontists monitor your progress across the journey.' },
 ]
 
-const StepsSection = () => (
-    <section style={{ 
-        backgroundColor: '#f0f9ff',  // light blue outer bg
-        padding: '48px 24px',
-    }}>
-        {/* White rounded card wrapping everything */}
-        <div style={{ 
-            maxWidth: 900, 
-            margin: '0 auto',
-            backgroundColor: '#ffffff',
-            borderRadius: 20,
-            padding: '40px 36px',
-            display: 'flex', 
-            flexDirection: 'row', 
-            gap: 40, 
-            alignItems: 'center',
-        }}>
-            {/* LEFT: heading + 2x2 steps grid */}
-            <div style={{ flex: '0 0 50%' }}>
-                <h2 style={{
-                    fontSize: 'clamp(22px, 3vw, 32px)',
-                    fontFamily: "'Montserrat', sans-serif",
-                    fontWeight: 800, 
-                    color: '#171b1b', 
-                    marginBottom: 32,
-                    marginTop: 0,
-                    lineHeight: 1.2,
-                }}>
-                    Get your perfect smile in four simple steps
-                </h2>
+const StepsSection = () => {
+    const width = useWindowWidth()
+    const isMobile = width < 768
 
-                {/* Fixed 2x2 grid */}
-                <div style={{ 
-                    display: 'grid', 
-                    gridTemplateColumns: '1fr 1fr',
-                    gap: 28,
-                }}>
-                    {steps.map((step) => (
-                        <div key={step.number} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-                            <div style={{
-                                width: 48, height: 48, 
-                                backgroundColor: '#c7e0f2',
-                                borderRadius: '50%', 
-                                display: 'flex', 
-                                alignItems: 'center',
-                                justifyContent: 'center', 
-                                flexShrink: 0,
-                            }}>
+    return (
+        <section style={{ 
+            backgroundColor: '#f0f9ff',
+            padding: isMobile ? '24px 16px' : '48px 24px',
+        }}>
+            <div style={{ 
+                maxWidth: 900, 
+                margin: '0 auto',
+                backgroundColor: '#ffffff',
+                borderRadius: 20,
+                padding: isMobile ? '24px 20px' : '40px 36px',
+                display: 'flex', 
+                flexDirection: isMobile ? 'column' : 'row',
+                gap: isMobile ? 24 : 40, 
+                alignItems: 'center',
+            }}>
+
+                {/* MOBILE ONLY: heading + video at top */}
+                {isMobile && (
+                    <>
+                        <h2 style={{
+                            fontSize: '22px',
+                            fontFamily: "'Montserrat', sans-serif",
+                            fontWeight: 800, 
+                            color: '#171b1b', 
+                            marginBottom: 0,
+                            marginTop: 0,
+                            lineHeight: 1.2,
+                            width: '100%',
+                        }}>
+                            Get your perfect smile in four simple steps
+                        </h2>
+
+                        <div style={{ 
+                            width: '100%',
+                            borderRadius: 16,
+                            overflow: 'hidden',
+                            border: '3px solid #7c3aed',
+                            position: 'relative',
+                        }}>
+                            <img 
+                                src="/images/img_screenshot_20240216_122938.png" 
+                                alt="Treatment video" 
+                                style={{ 
+                                    width: '100%', 
+                                    height: 200,
+                                    objectFit: 'cover',
+                                    display: 'block',
+                                }} 
+                            />
+                            <button
+                                aria-label="Play video"
+                                style={{
+                                    position: 'absolute', 
+                                    top: '50%', 
+                                    left: '50%',
+                                    transform: 'translate(-50%, -50%)',
+                                    width: 56, 
+                                    height: 56,
+                                    backgroundColor: 'rgba(255,255,255,0.25)',
+                                    backdropFilter: 'blur(4px)',
+                                    border: '2px solid #fff', 
+                                    borderRadius: '50%',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    cursor: 'pointer',
+                                    padding: 0,
+                                }}
+                            >
+                                <img 
+                                    src="/images/img_polygon_3.svg" 
+                                    alt="Play" 
+                                    style={{ width: 20, height: 20, marginLeft: 3 }}
+                                />
+                            </button>
+                        </div>
+                    </>
+                )}
+
+                {/* LEFT: heading (desktop only) + steps grid */}
+                <div style={{ flex: isMobile ? 'unset' : '0 0 50%', width: '100%' }}>
+                    
+                    {/* Heading — desktop only, already shown above on mobile */}
+                    {!isMobile && (
+                        <h2 style={{
+                            fontSize: 'clamp(22px, 3vw, 32px)',
+                            fontFamily: "'Montserrat', sans-serif",
+                            fontWeight: 800, 
+                            color: '#171b1b', 
+                            marginBottom: 32,
+                            marginTop: 0,
+                            lineHeight: 1.2,
+                        }}>
+                            Get your perfect smile in four simple steps
+                        </h2>
+                    )}
+
+                    <div style={{ 
+                        display: 'grid', 
+                        gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+                        gap: isMobile ? 20 : 28,
+                    }}>
+                        {steps.map((step) => (
+                            <div key={step.number} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
                                 <div style={{
-                                    width: 36, height: 36, 
-                                    backgroundColor: '#fff',
+                                    width: 48, height: 48, 
+                                    backgroundColor: '#c7e0f2',
                                     borderRadius: '50%', 
                                     display: 'flex', 
                                     alignItems: 'center',
                                     justifyContent: 'center', 
-                                    fontSize: 18, 
-                                    fontWeight: 700, 
-                                    color: '#171b1b',
+                                    flexShrink: 0,
                                 }}>
-                                    {step.number}
+                                    <div style={{
+                                        width: 36, height: 36, 
+                                        backgroundColor: '#fff',
+                                        borderRadius: '50%', 
+                                        display: 'flex', 
+                                        alignItems: 'center',
+                                        justifyContent: 'center', 
+                                        fontSize: 18, 
+                                        fontWeight: 700, 
+                                        color: '#171b1b',
+                                    }}>
+                                        {step.number}
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 style={{ 
+                                        fontSize: 14, 
+                                        fontWeight: 700, 
+                                        color: '#171b1b', 
+                                        marginBottom: 4,
+                                        marginTop: 0,
+                                    }}>
+                                        {step.title}
+                                    </h3>
+                                    <p style={{ 
+                                        fontSize: 12, 
+                                        lineHeight: 1.5, 
+                                        color: '#444',
+                                        margin: 0,
+                                    }}>
+                                        {step.description}
+                                    </p>
                                 </div>
                             </div>
-                            <div>
-                                <h3 style={{ 
-                                    fontSize: 14, 
-                                    fontWeight: 700, 
-                                    color: '#171b1b', 
-                                    marginBottom: 4,
-                                    marginTop: 0,
-                                }}>
-                                    {step.title}
-                                </h3>
-                                <p style={{ 
-                                    fontSize: 12, 
-                                    lineHeight: 1.5, 
-                                    color: '#444',
-                                    margin: 0,
-                                }}>
-                                    {step.description}
-                                </p>
-                            </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
-            </div>
 
-            {/* RIGHT: video with purple border */}
-            <div style={{ 
-                flex: 1,
-                borderRadius: 16,
-                overflow: 'hidden',
-                border: '3px solid #7c3aed',
-                position: 'relative',
-            }}>
-                <img 
-                    src="/images/img_screenshot_20240216_122938.png" 
-                    alt="Treatment video" 
-                    style={{ 
-                        width: '100%', 
-                        height: '100%',
-                        objectFit: 'cover',
-                        display: 'block',
-                    }} 
-                />
-                <button
-                    aria-label="Play video"
-                    style={{
-                        position: 'absolute', 
-                        top: '50%', 
-                        left: '50%',
-                        transform: 'translate(-50%, -50%)',
-                        width: 56, 
-                        height: 56,
-                        backgroundColor: 'rgba(255,255,255,0.25)',
-                        backdropFilter: 'blur(4px)',
-                        border: '2px solid #fff', 
-                        borderRadius: '50%',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        cursor: 'pointer',
-                        padding: 0,
-                    }}
-                >
-                    <img 
-                        src="/images/img_polygon_3.svg" 
-                        alt="Play" 
-                        style={{ width: 20, height: 20, marginLeft: 3 }}
-                    />
-                </button>
+                {/* RIGHT: video — desktop only */}
+                {!isMobile && (
+                    <div style={{ 
+                        flex: 1,
+                        borderRadius: 16,
+                        overflow: 'hidden',
+                        border: '3px solid #7c3aed',
+                        position: 'relative',
+                    }}>
+                        <img 
+                            src="/images/img_screenshot_20240216_122938.png" 
+                            alt="Treatment video" 
+                            style={{ 
+                                width: '100%', 
+                                height: '100%',
+                                objectFit: 'cover',
+                                display: 'block',
+                            }} 
+                        />
+                        <button
+                            aria-label="Play video"
+                            style={{
+                                position: 'absolute', 
+                                top: '50%', 
+                                left: '50%',
+                                transform: 'translate(-50%, -50%)',
+                                width: 56, 
+                                height: 56,
+                                backgroundColor: 'rgba(255,255,255,0.25)',
+                                backdropFilter: 'blur(4px)',
+                                border: '2px solid #fff', 
+                                borderRadius: '50%',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                cursor: 'pointer',
+                                padding: 0,
+                            }}
+                        >
+                            <img 
+                                src="/images/img_polygon_3.svg" 
+                                alt="Play" 
+                                style={{ width: 20, height: 20, marginLeft: 3 }}
+                            />
+                        </button>
+                    </div>
+                )}
+
             </div>
-        </div>
-    </section>
-)
+        </section>
+    )
+}
 // ─── DOCTOR SECTION ───────────────────────────────────────────────────────────
 
-const DoctorSection = () => (
-    <section style={{ backgroundColor: '#f0f9ff', padding: '0px 16px' }}>
-        <div style={{ display: 'flex', flexDirection: 'row', gap: 32, maxWidth: 1440, margin: '0 auto' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 32, justifyContent: 'center' }}>
-                <h2 style={{
-                    fontSize: 'clamp(28px, 4vw, 40px)',
-                    fontFamily: "'Montserrat', sans-serif",
-                    fontWeight: 800, color: '#171b1b',
+const DoctorSection = () => {
+    const width = useWindowWidth()
+    const isMobile = width < 768
+
+    return (
+        <section style={{ backgroundColor: '#f0f9ff', padding: isMobile ? '0px' : '0px 16px' }}>
+            <div style={{ 
+                display: 'flex', 
+                flexDirection: isMobile ? 'column' : 'row', 
+                gap: isMobile ? 0 : 32, 
+                maxWidth: 1440, 
+                margin: '0 auto',
+            }}>
+
+                {/* Image — top on mobile, right on desktop */}
+                {isMobile && (
+                    <img
+                        src="/images/img_rectangle_3022.png"
+                        alt="Professional orthodontist"
+                        style={{ 
+                            width: '100%',
+                            height: 240,
+                            objectFit: 'cover',
+                            objectPosition: 'top',
+                            display: 'block',
+                        }}
+                    />
+                )}
+
+                {/* Text content */}
+                <div style={{ 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    gap: isMobile ? 16 : 32, 
+                    justifyContent: 'center',
+                    padding: isMobile ? '24px 16px' : undefined,
                 }}>
-                    We are Doctor-led, not direct-to-customers
-                </h2>
-                <p style={{ fontSize: 14, lineHeight: 1.4, color: '#171b1b' }}>
-                    We don't offer direct-to-customer invisible aligners. We treat you in a Dental clinic with an Orthodontist.
-                    Aligners are just the beginning; we ensure comprehensive treatment in over 450+ clinics nationwide.
-                </p>
-                <button
-                    style={{
-                        padding: '14px 90px', backgroundColor: '#8f62d4',
-                        color: '#fff', fontSize: 16, fontWeight: 600,
-                        borderRadius: 8, border: 'none', cursor: 'pointer',
-                        width: 'fit-content', transition: 'background-color 0.3s',
-                    }}
-                    onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#7a4fc1')}
-                    onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#8f62d4')}
-                >
-                    Get a Callback
-                </button>
+                    <h2 style={{
+                        fontSize: isMobile ? '26px' : 'clamp(28px, 4vw, 40px)',
+                        fontFamily: "'Montserrat', sans-serif",
+                        fontWeight: 800, 
+                        color: '#171b1b',
+                        margin: 0,
+                    }}>
+                        We are Doctor-led, not direct-to-customers
+                    </h2>
+                    <p style={{ 
+                        fontSize: 14, 
+                        lineHeight: 1.6, 
+                        color: '#171b1b',
+                        margin: 0,
+                    }}>
+                        We don't offer direct-to-customer invisible aligners. We treat you in a Dental clinic with an Orthodontist.
+                        Aligners are just the beginning; we ensure comprehensive treatment in over 450+ clinics nationwide.
+                    </p>
+                    <button
+                        style={{
+                            padding: '14px 90px', 
+                            backgroundColor: '#8f62d4',
+                            color: '#fff', 
+                            fontSize: 16, 
+                            fontWeight: 600,
+                            borderRadius: 8, 
+                            border: 'none', 
+                            cursor: 'pointer',
+                            width: isMobile ? '100%' : 'fit-content',  // full width on mobile
+                            transition: 'background-color 0.3s',
+                        }}
+                        onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#7a4fc1')}
+                        onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#8f62d4')}
+                    >
+                        Get a Callback
+                    </button>
+                </div>
+
+                {/* Image — right side on desktop only */}
+                {!isMobile && (
+                    <img
+                        src="/images/img_rectangle_3022.png"
+                        alt="Professional orthodontist"
+                        style={{ width: '100%' }}
+                    />
+                )}
+
             </div>
-            <img
-                src="/images/img_rectangle_3022.png"
-                alt="Professional orthodontist"
-                style={{ width: '100%'}}
-            />
-        </div>
-    </section>
-)
+        </section>
+    )
+}
 
 // ─── TESTIMONIALS SECTION ─────────────────────────────────────────────────────
 

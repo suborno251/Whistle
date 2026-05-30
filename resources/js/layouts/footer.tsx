@@ -1,64 +1,160 @@
+import { useState, useEffect } from 'react'
 
+// ─── WINDOW WIDTH ───────────────────────────────────────────────────────────────────
+const useWindowWidth = () => {
+    const [width, setWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 0)
+    useEffect(() => {
+        const handleResize = () => setWidth(window.innerWidth)
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
+    }, [])
+    return width
+}
 export const FooterSection = () => {
+    const width = useWindowWidth()
+    const isMobile = width < 768
+
     const quickLinks = ['Home', 'Book a Free Scan', 'How it Works', 'Range of Aligners', 'Aligners vs Braces', 'FAQs']
     const legalLinks = ['Privacy Policy', 'Terms of Service']
 
     return (
-        <footer style={{ backgroundColor: '#171b1b', padding: '48px 16px', marginTop: 48 }}>
-            <div style={{ display: 'flex', flexDirection: 'row', gap: 280, maxWidth: 1440, margin: '0 auto' }}>
-                {/* Quick Links */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-                    <h3 style={{ fontSize: 20, fontWeight: 700, color: '#fff', marginBottom: 12 }}>Quick Links</h3>
+        <footer style={{ backgroundColor: '#171b1b', padding: isMobile ? '32px 16px' : '48px 40px', marginTop: 48 }}>
+            
+            {isMobile ? (
+                <>
+                    {/* Mobile: 2-column grid for Quick Links + Contact */}
+                    <div style={{ 
+                        display: 'grid', 
+                        gridTemplateColumns: '1fr 1fr', 
+                        gap: 32,
+                        marginBottom: 24,
+                    }}>
+                        {/* Quick Links */}
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                            <h3 style={{ fontSize: 16, fontWeight: 700, color: '#fff', margin: '0 0 8px 0' }}>
+                                Quick Links
+                            </h3>
+                            {quickLinks.map((link) => (
+                                <a key={link} href="#" style={{ fontSize: 14, fontWeight: 500, color: '#fff', textDecoration: 'none' }}>
+                                    {link}
+                                </a>
+                            ))}
+                        </div>
+
+                        {/* Contact */}
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                            <h3 style={{ fontSize: 16, fontWeight: 700, color: '#fff', margin: '0 0 8px 0' }}>
+                                Get in Touch Now!
+                            </h3>
+                            {[
+                                { icon: 'img_phone_call_01.svg', text: '011-6932-8350' },
+                                { icon: 'img_mail_01.svg', text: 'support@whistle.in' },
+                            ].map((item) => (
+                                <div key={item.text} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                                    <img src={`/images/${item.icon}`} alt="" style={{ width: 20, height: 20 }} />
+                                    <span style={{ fontSize: 13, fontWeight: 500, color: '#fff' }}>{item.text}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Divider */}
+                    <div style={{ borderTop: '1px solid #2f3636', margin: '8px 0 24px 0' }} />
+
+                    {/* Legal links */}
+                    <div style={{ display: 'flex', gap: 24, marginBottom: 24 }}>
+                        {legalLinks.map((link) => (
+                            <a key={link} href="#" style={{ fontSize: 14, fontWeight: 500, color: '#fff', textDecoration: 'none' }}>
+                                {link}
+                            </a>
+                        ))}
+                    </div>
+
+                    {/* Divider */}
+                    <div style={{ borderTop: '1px solid #2f3636', margin: '8px 0 24px 0' }} />
+
+                    {/* Social — centered at bottom */}
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16 }}>
+                        <h3 style={{ fontSize: 16, fontWeight: 700, color: '#fff', margin: 0 }}>
+                            Follow us on
+                        </h3>
+                        <div style={{ display: 'flex', gap: 20 }}>
+                            {[
+                                { icon: 'img_1161953_instagram_icon.svg', label: 'Instagram' },
+                                { icon: 'img_104498_facebook_icon.svg', label: 'Facebook' },
+                                { icon: 'img_11053970_x_logo.svg', label: 'Twitter' },
+                            ].map((s) => (
+                                <a key={s.label} href="#" aria-label={s.label}>
+                                    <img src={`/images/${s.icon}`} alt={s.label} style={{ width: 32, height: 32 }} />
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+                </>
+            ) : (
+                /* Desktop: 4 columns spread evenly */
+                <div style={{ 
+                    display: 'flex', 
+                    flexDirection: 'row', 
+                    justifyContent: 'space-between',  // fix: was gap: 280
+                    maxWidth: 1440, 
+                    margin: '0 auto',
+                    alignItems: 'flex-start',
+                }}>
+                    {/* Quick Links */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+                        <h3 style={{ fontSize: 20, fontWeight: 700, color: '#fff', margin: '0 0 12px 0' }}>Quick Links</h3>
+                        <nav style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                            {quickLinks.map((link) => (
+                                <a key={link} href="#" style={{ fontSize: 16, fontWeight: 500, color: '#fff', textDecoration: 'none' }}>
+                                    {link}
+                                </a>
+                            ))}
+                        </nav>
+                    </div>
+
+                    {/* Contact */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+                        <h3 style={{ fontSize: 20, fontWeight: 700, color: '#fff', margin: '0 0 12px 0' }}>Get in Touch Now!</h3>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                            {[
+                                { icon: 'img_phone_call_01.svg', text: '011-6932-8350' },
+                                { icon: 'img_mail_01.svg', text: 'support@whistle.in' },
+                            ].map((item) => (
+                                <div key={item.text} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                                    <img src={`/images/${item.icon}`} alt="" style={{ width: 24, height: 24 }} />
+                                    <span style={{ fontSize: 16, fontWeight: 500, color: '#fff' }}>{item.text}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Social */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+                        <h3 style={{ fontSize: 20, fontWeight: 700, color: '#fff', margin: '0 0 12px 0' }}>Follow us on</h3>
+                        <div style={{ display: 'flex', gap: 20 }}>
+                            {[
+                                { icon: 'img_1161953_instagram_icon.svg', label: 'Instagram' },
+                                { icon: 'img_104498_facebook_icon.svg', label: 'Facebook' },
+                                { icon: 'img_11053970_x_logo.svg', label: 'Twitter' },
+                            ].map((s) => (
+                                <a key={s.label} href="#" aria-label={s.label}>
+                                    <img src={`/images/${s.icon}`} alt={s.label} style={{ width: 36, height: 36 }} />
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Legal */}
                     <nav style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-                        {quickLinks.map((link) => (
+                        {legalLinks.map((link) => (
                             <a key={link} href="#" style={{ fontSize: 16, fontWeight: 500, color: '#fff', textDecoration: 'none' }}>
                                 {link}
                             </a>
                         ))}
                     </nav>
                 </div>
-
-                {/* Contact */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-                    <h3 style={{ fontSize: 20, fontWeight: 700, color: '#fff', marginBottom: 12 }}>Get in Touch Now!</h3>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-                        {[
-                            { icon: 'img_phone_call_01.svg', text: '011-6932-8350' },
-                            { icon: 'img_mail_01.svg', text: 'support@whistle.in' },
-                        ].map((item) => (
-                            <div key={item.text} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                                <img src={`/images/${item.icon}`} alt="" style={{ width: 24, height: 24 }} />
-                                <span style={{ fontSize: 16, fontWeight: 500, color: '#fff' }}>{item.text}</span>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-                {/* Social */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-                    <h3 style={{ fontSize: 20, fontWeight: 700, color: '#fff', marginBottom: 12 }}>Follow us on</h3>
-                    <div style={{ display: 'flex', gap: 20 }}>
-                        {[
-                            { icon: 'img_1161953_instagram_icon.svg', label: 'Instagram' },
-                            { icon: 'img_104498_facebook_icon.svg', label: 'Facebook' },
-                            { icon: 'img_11053970_x_logo.svg', label: 'Twitter' },
-                        ].map((s) => (
-                            <a key={s.label} href="#" aria-label={s.label}>
-                                <img src={`/images/${s.icon}`} alt={s.label} style={{ width: 36, height: 36 }} />
-                            </a>
-                        ))}
-                    </div>
-                </div>
-
-                {/* Legal */}
-                <nav style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-                    {legalLinks.map((link) => (
-                        <a key={link} href="#" style={{ fontSize: 16, fontWeight: 500, color: '#fff', textDecoration: 'none' }}>
-                            {link}
-                        </a>
-                    ))}
-                </nav>
-            </div>
+            )}
         </footer>
     )
 }
