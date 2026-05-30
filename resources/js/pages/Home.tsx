@@ -41,63 +41,7 @@ interface DifferenceItem {
     description: string
 }
 
-// ─── HEADER ───────────────────────────────────────────────────────────────────
-
-
-// ─── HERO SECTION ─────────────────────────────────────────────────────────────
-
-const HeroSection = () => (
-    <section style={{
-        backgroundColor: '#f6f3fc',
-        backgroundImage: 'url(/images/img_group_2609310.png)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',    
-        width: '100%',
-    }}>
-        <div style={{
-        display: 'flex',
-        gap: 20,
-        position: 'relative',
-        zIndex: 2,
-        maxWidth: 1222,
-        margin: '0 auto',
-        alignItems: 'center',
-        justifyContent: 'center'
-        }}>
-            <div>
-                <h1 style={{
-                    fontSize: 'clamp(24px, 4vw, 40px)',
-                    fontFamily: "'Montserrat', sans-serif",
-                    fontWeight: 800,
-                    lineHeight: '130%',
-                    letterSpacing: '0px',
-                    textAlign: 'left',
-                    color: '#171b1b',
-                    marginBottom: 16,
-                }}>
-                    Invisible Aligners for a dream smile
-                </h1>
-                <p style={{ fontSize: 'clamp(16px, 2vw, 24px)', fontWeight: 500, color: '#171b1b' }}>
-                    Book a Scan and avail a free <br /> Orthodontist Consult{' '}
-                    <span style={{ fontWeight: 700, color: '#8f62d4' }}>worth ₹1500</span>
-                </p>
-            </div>
-            <img
-                src="/images/img_ai_expand_pranav.png"
-                alt="Happy customer with perfect smile"
-                style={{ 
-                    width: '100%',
-                    maxWidth: 200,
-                    height: 'auto',   
-                    objectFit: 'contain',
-                    flexShrink: 0, 
-                }}
-            />
-        </div>
-    </section>
-)
-
-// ─── FORM SECTION ─────────────────────────────────────────────────────────────
+// ─── WINDOW WIDTH ───────────────────────────────────────────────────────────────────
 const useWindowWidth = () => {
     const [width, setWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 0)
     useEffect(() => {
@@ -107,6 +51,68 @@ const useWindowWidth = () => {
     }, [])
     return width
 }
+
+// ─── HERO SECTION ─────────────────────────────────────────────────────────────
+
+const HeroSection = () => {
+    const width = useWindowWidth()
+    const isMobile = width < 768
+
+    return (
+        <section style={{
+            backgroundColor: '#f6f3fc',
+            backgroundImage: 'url(/images/img_group_2609310.png)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',    
+            width: '100%',
+        }}>
+            <div style={{
+                display: 'flex',
+                gap: 20,
+                position: 'relative',
+                zIndex: 2,
+                maxWidth: 1222,
+                margin: '0 auto',
+                alignItems: isMobile ? 'flex-end' : 'center',
+                justifyContent: 'center',
+                padding: isMobile ? '24px 20px 0 20px' : undefined,
+            }}>
+                <div style={{ flex: isMobile ? 1 : undefined }}>
+                    <h1 style={{
+                        fontSize: 'clamp(24px, 4vw, 40px)',
+                        fontFamily: "'Montserrat', sans-serif",
+                        fontWeight: 800,
+                        lineHeight: '130%',
+                        letterSpacing: '0px',
+                        textAlign: 'left',
+                        color: '#171b1b',
+                        marginBottom: 16,
+                    }}>
+                        Invisible Aligners for a dream smile
+                    </h1>
+                    <p style={{ fontSize: 'clamp(16px, 2vw, 24px)', fontWeight: 500, color: '#171b1b' }}>
+                        Book a Scan and avail a free <br /> Orthodontist Consult{' '}
+                        <span style={{ fontWeight: 700, color: '#8f62d4' }}>worth ₹1500</span>
+                    </p>
+                </div>
+                <img
+                    src="/images/img_ai_expand_pranav.png"
+                    alt="Happy customer with perfect smile"
+                    style={{ 
+                        width: '100%',
+                        maxWidth: isMobile ? 160 : 200,
+                        height: 'auto',   
+                        objectFit: 'contain',
+                        flexShrink: 0,
+                        alignSelf: isMobile ? 'flex-end' : undefined,
+                    }}
+                />
+            </div>
+        </section>
+    )
+}
+
+// ─── FORM SECTION ─────────────────────────────────────────────────────────────
 
 
 const FormSection = () => {
@@ -262,41 +268,65 @@ const FormSection = () => {
 
 // ─── CLOVE SECTION ────────────────────────────────────────────────────────────
 
-const CloveSection = () => (
-    <section style={{ padding: '32px 16px' }}>
-        <div style={{
-            backgroundColor: '#f0f9ff',
-            padding: '32px 16px',
-            borderRadius: 24,
-        }}>
-            <div style={{
-                display: 'flex',
-                flexDirection: 'row',
-                gap: 16,
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: 16,
-            }}>
-                <p style={{ fontSize: 20, fontWeight: 600, textAlign: 'center', color: '#000' }}>
-                    Book a Free 3D Teeth Scan and Orthodontist Consult in a Clove Dental Clinic near you.
-                </p>
-                <div style={{ backgroundColor: '#4d2c19', padding: 4, display: 'inline-flex' }}>
-                    <img src="/images/img_clove_logo.svg" alt="Clove Dental" style={{ width: 100 }} />
-                </div>
-            </div>
-            <a href="#" style={{
-                display: 'flex', alignItems: 'center', gap: 8,
-                justifyContent: 'flex-end',
-                color: '#8f62d4', fontSize: 16, fontWeight: 600,
-                textDecoration: 'none',
-            }}>
-                Find Clinic
-                <img src="/images/img_frame_2609671.svg" alt="Arrow" style={{ width: 20, height: 20 }} />
-            </a>
-        </div>
-    </section>
-)
+const CloveSection = () => {
+    const width = useWindowWidth()
+    const isMobile = width < 768
 
+    return (
+        <section style={{ padding: '32px 16px' }}>
+            <div style={{
+                backgroundColor: '#f0f9ff',
+                padding: '32px 24px',
+                borderRadius: 24,
+            }}>
+                <div style={{
+                    display: 'flex',
+                    flexDirection: 'row',  // keep row on both — matches desktop design
+                    gap: 16,
+                    alignItems: 'center',
+                    justifyContent: isMobile ? 'space-between' : 'center',
+                    marginBottom: 16,
+                }}>
+                    <p style={{ 
+                        fontSize: isMobile ? 16 : 20, 
+                        fontWeight: 600, 
+                        textAlign: isMobile ? 'left' : 'center',  // left-aligned on mobile like Figma
+                        color: '#000',
+                        margin: 0,
+                        flex: 1,  // text takes available space, pushes logo to right
+                    }}>
+                        Book Free Orthodontist Consult at a Clove Dental Clinic. 450+ Clinics near you
+                    </p>
+                    <div style={{ 
+                        backgroundColor: '#4d2c19', 
+                        padding: 4, 
+                        display: 'inline-flex',
+                        flexShrink: 0,  // logo never shrinks
+                    }}>
+                        <img 
+                            src="/images/img_clove_logo.svg" 
+                            alt="Clove Dental" 
+                            style={{ width: isMobile ? 80 : 100 }} 
+                        />
+                    </div>
+                </div>
+                <a href="#" style={{
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    gap: 8,
+                    justifyContent: 'flex-end',
+                    color: '#8f62d4', 
+                    fontSize: 16, 
+                    fontWeight: 600,
+                    textDecoration: 'none',
+                }}>
+                    Find Clinic
+                    <img src="/images/img_frame_2609671.svg" alt="Arrow" style={{ width: 20, height: 20 }} />
+                </a>
+            </div>
+        </section>
+    )
+}
 // ─── SCROLLING BANNER ─────────────────────────────────────────────────────────
 
 const ScrollingBanner = () => {
@@ -345,13 +375,14 @@ const ScrollingBanner = () => {
 const DreamSection = () => {
     const width = useWindowWidth()
     const isDesktop = width >= 768
+    const isMobile = width < 768
 
     return (
-        <section style={{ backgroundColor: '#f0f9ff', padding: '48px 16px' }}>
+        <section style={{ backgroundColor: '#f0f9ff', padding: isMobile ? '24px 16px' : '48px 16px' }}>
             <div style={{
                 display: 'flex',
                 flexDirection: isDesktop ? 'row' : 'column',
-                gap: 32,
+                gap: isMobile ? 16 : 32,
                 maxWidth: 1440,
                 margin: '0 auto',
                 alignItems: isDesktop ? 'flex-start' : 'stretch',
@@ -359,14 +390,23 @@ const DreamSection = () => {
 
                 <div style={{ flex: 1 }}>
                     <h2 style={{
-                        fontSize: 'clamp(28px, 4vw, 40px)',
+                        fontSize: isMobile ? '26px' : 'clamp(28px, 4vw, 40px)',
                         fontFamily: "'Montserrat', sans-serif",
-                        fontWeight: 800, lineHeight: 1.2,
-                        color: '#171b1b', marginBottom: 32,
+                        fontWeight: 800, 
+                        lineHeight: 1.2,
+                        color: '#171b1b', 
+                        marginBottom: isMobile ? 12 : 32,
+                        marginTop: 0,
                     }}>
                         Dream smiles achieved secretly
                     </h2>
-                    <p style={{ fontSize: 14, color: '#171b1b', lineHeight: 1.4, marginBottom: 16 }}>
+                    <p style={{ 
+                        fontSize: 14, 
+                        color: '#171b1b', 
+                        lineHeight: 1.4, 
+                        marginBottom: 16,
+                        marginTop: 0,
+                    }}>
                         Experience the superior quality of our Whistle Aligners crafted with 3-layer PU material.
                         With 450+ clinics nationwide, enjoy comfortable treatment by expert orthodontists at House of Clove.
                     </p>
@@ -380,23 +420,48 @@ const DreamSection = () => {
                 </div>
 
                 <div style={{
-                    backgroundColor: '#fff', borderRadius: 16,
-                    padding: 22, boxShadow: '0px 2px 20px rgba(222,226,226,0.7)',
+                    backgroundColor: '#fff', 
+                    borderRadius: 16,
+                    padding: isMobile ? '16px' : 22, 
+                    boxShadow: '0px 2px 20px rgba(222,226,226,0.7)',
                     width: isDesktop ? 380 : '100%',
                     flexShrink: 0,
+                    boxSizing: 'border-box',  // prevents overflow
                 }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 24 }}>
-                        <h3 style={{ fontSize: 20, fontFamily: "'Montserrat', sans-serif", fontWeight: 800, color: '#2f3636' }}>
+                    <div style={{ 
+                        display: 'flex', 
+                        justifyContent: 'space-between', 
+                        alignItems: 'flex-start', 
+                        marginBottom: isMobile ? 12 : 24,
+                    }}>
+                        <h3 style={{ 
+                            fontSize: isMobile ? 17 : 20, 
+                            fontFamily: "'Montserrat', sans-serif", 
+                            fontWeight: 800, 
+                            color: '#2f3636',
+                            margin: 0,
+                        }}>
                             Whistle Aligners
                         </h3>
-                        <img src="/images/img_image_3.png" alt="Whistle Aligners" style={{ width: 80 }} />
+                        <img 
+                            src="/images/img_image_3.png" 
+                            alt="Whistle Aligners" 
+                            style={{ 
+                                width: isMobile ? 60 : 80,  // smaller on mobile so it doesn't overflow
+                                flexShrink: 0,
+                            }} 
+                        />
                     </div>
-                    <p style={{ fontSize: 14, textDecoration: 'line-through', color: '#2f3636', marginBottom: 4 }}>₹84,000</p>
+                    <p style={{ fontSize: 14, textDecoration: 'line-through', color: '#2f3636', marginBottom: 4, marginTop: 0 }}>
+                        ₹84,000
+                    </p>
                     <div style={{ display: 'flex', alignItems: 'flex-end', gap: 8, marginBottom: 4 }}>
                         <span style={{ fontSize: 14, color: '#2f3636' }}>starting at</span>
-                        <span style={{ fontSize: 20, fontWeight: 700, color: '#8f62d4' }}>₹47,999</span>
+                        <span style={{ fontSize: isMobile ? 18 : 20, fontWeight: 700, color: '#8f62d4' }}>₹47,999</span>
                     </div>
-                    <p style={{ fontSize: 12, color: '#768888', marginBottom: 24 }}>inc. of all taxes</p>
+                    <p style={{ fontSize: 12, color: '#768888', marginBottom: isMobile ? 16 : 24, marginTop: 0 }}>
+                        inc. of all taxes
+                    </p>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                         {['Offer valid for a limited time', 'Easy financing options'].map((f, i) => (
                             <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -416,7 +481,7 @@ const DreamSection = () => {
                 </div>
 
                 {!isDesktop && (
-                    <p style={{ fontSize: 14, color: '#171b1b', lineHeight: 1.4 }}>
+                    <p style={{ fontSize: 14, color: '#171b1b', lineHeight: 1.4, marginTop: 0 }}>
                         The pricing is different for every case. Cases with higher complexity requiring more aligners
                         and additional time and effort from our dentists.
                     </p>
@@ -561,88 +626,99 @@ const differenceItems: DifferenceItem[] = [
     { icon: 'img_group_2609309.svg', title: 'Transparent Pricing', description: "Everything's included – from scans to aligners, doctor consults, and retainers – no hidden costs." },
 ]
 
-const DifferenceSection = () => (
-    <section style={{ 
-        padding: '48px 24px', 
-        background: '#ddeaf7',
-    }}>
-        <div style={{ 
-            maxWidth: 900, 
-            margin: '0 auto',
-            display: 'flex',
-            flexDirection: 'row',
-            gap: 16,
-            alignItems: 'stretch',
+const DifferenceSection = () => {
+    const width = useWindowWidth()
+    const isMobile = width < 768
+
+    return (
+        <section style={{ 
+            padding: isMobile ? '24px 16px' : '48px 24px', 
+            background: '#ddeaf7',
         }}>
-            {/* LEFT CARD: white content card */}
             <div style={{ 
-                flex: '0 0 52%',
-                padding: '40px 36px',
+                maxWidth: 900, 
+                margin: '0 auto',
                 display: 'flex',
-                flexDirection: 'column',
-                gap: 28,
-                background: '#ffffff',
-                borderRadius: 20,
+                flexDirection: isMobile ? 'column' : 'row',
+                gap: 16,
+                alignItems: 'stretch',
             }}>
-                <h2 style={{
-                    fontSize: 'clamp(22px, 3vw, 32px)',
-                    fontFamily: "'Montserrat', sans-serif",
-                    fontWeight: 800,
-                    color: '#171b1b',
-                    margin: 0,
+                {/* LEFT/TOP CARD: white content card */}
+                <div style={{ 
+                    flex: isMobile ? 'unset' : '0 0 52%',
+                    padding: isMobile ? '24px 20px' : '40px 36px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: isMobile ? 20 : 28,
+                    background: '#ffffff',
+                    borderRadius: 20,
                 }}>
-                    The Whistle Difference
-                </h2>
+                    <h2 style={{
+                        fontSize: isMobile ? '24px' : 'clamp(22px, 3vw, 32px)',
+                        fontFamily: "'Montserrat', sans-serif",
+                        fontWeight: 800,
+                        color: '#171b1b',
+                        margin: 0,
+                    }}>
+                        The Whistle Difference
+                    </h2>
 
-                {differenceItems.map((item, i) => (
-                    <div key={i} style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
-                        <img 
-                            src={`/images/${item.icon}`} 
-                            alt={item.title} 
-                            style={{ width: 48, height: 48, flexShrink: 0 }} 
-                        />
-                        <div>
-                            <h3 style={{ 
-                                fontSize: 15, 
-                                fontWeight: 700, 
-                                color: '#2f3636', 
-                                margin: '0 0 5px 0',
-                            }}>
-                                {item.title}
-                            </h3>
-                            <p style={{ 
-                                fontSize: 13, 
-                                lineHeight: 1.5, 
-                                color: '#444',
-                                margin: 0,
-                            }}>
-                                {item.description}
-                            </p>
+                    {differenceItems.map((item, i) => (
+                        <div key={i} style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
+                            <img 
+                                src={`/images/${item.icon}`} 
+                                alt={item.title} 
+                                style={{ 
+                                    width: isMobile ? 40 : 48, 
+                                    height: isMobile ? 40 : 48, 
+                                    flexShrink: 0,
+                                }} 
+                            />
+                            <div>
+                                <h3 style={{ 
+                                    fontSize: isMobile ? 14 : 15, 
+                                    fontWeight: 700, 
+                                    color: '#2f3636', 
+                                    margin: '0 0 5px 0',
+                                }}>
+                                    {item.title}
+                                </h3>
+                                <p style={{ 
+                                    fontSize: 13, 
+                                    lineHeight: 1.5, 
+                                    color: '#444',
+                                    margin: 0,
+                                }}>
+                                    {item.description}
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                ))}
-            </div>
+                    ))}
+                </div>
 
-            {/* RIGHT CARD: image card */}
-            <div style={{ 
-                flex: 1,
-                borderRadius: 20,
-                overflow: 'hidden',
-            }}>
-                <img
-                    src="/images/img_whatsapp_image_2024_02_13.png"
-                    alt="Whistle Aligners showcase"
-                    style={{ 
-                        width: '100%', 
-                        height: '100%',
-                        objectFit: 'cover',
-                        display: 'block',
-                    }}
-                />
+                {/* RIGHT/BOTTOM CARD: image card */}
+                <div style={{ 
+                    flex: 1,
+                    borderRadius: 20,
+                    overflow: 'hidden',
+                    height: isMobile ? 220 : 'auto',  // fixed height on mobile so it doesn't go full tall
+                }}>
+                    <img
+                        src="/images/img_whatsapp_image_2024_02_13.png"
+                        alt="Whistle Aligners showcase"
+                        style={{ 
+                            width: '100%', 
+                            height: '100%',
+                            objectFit: 'cover',
+                            objectPosition: 'center',
+                            display: 'block',
+                        }}
+                    />
+                </div>
             </div>
-        </div>
-    </section>
-)
+        </section>
+    )
+}
 
 // ─── COMPARISON SECTION ───────────────────────────────────────────────────────
 
