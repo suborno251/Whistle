@@ -6,7 +6,7 @@ RUN cp .env.example .env
 RUN composer install --optimize-autoloader --no-dev
 
 # Stage 2 — PHP-FPM + Nginx
-FROM php:8.2-fpm
+FROM php:8.4-fpm
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
