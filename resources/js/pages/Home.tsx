@@ -43,12 +43,25 @@ interface DifferenceItem {
 
 // ─── WINDOW WIDTH ───────────────────────────────────────────────────────────────────
 const useWindowWidth = () => {
-    const [width, setWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 0)
+    const [width, setWidth] = useState(() => {
+        if (typeof window === 'undefined') return 0
+        return window.visualViewport?.width ?? window.innerWidth
+    })
+
     useEffect(() => {
-        const handleResize = () => setWidth(window.innerWidth)
+        const handleResize = () => {
+            setWidth(window.visualViewport?.width ?? window.innerWidth)
+        }
+
         window.addEventListener('resize', handleResize)
-        return () => window.removeEventListener('resize', handleResize)
+        window.visualViewport?.addEventListener('resize', handleResize)
+
+        return () => {
+            window.removeEventListener('resize', handleResize)
+            window.visualViewport?.removeEventListener('resize', handleResize)
+        }
     }, [])
+
     return width
 }
 
