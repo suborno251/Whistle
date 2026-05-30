@@ -1,39 +1,39 @@
-FROM php:8.4-fpm
+# Stage 1 — Build
+FROM composer:2 AS build
+WORKDIR /app
+COPY . .
+RUN cp .env.example .env
+RUN composer install --optimize-autoloader --no-dev
 
-# Install system dependencies
+# Stage 2 — PHP-FPM + Nginx
+FROM php:8.2-fpm
+
+# Install dependencies
 RUN apt-get update && apt-get install -y \
     git curl libpng-dev libonig-dev libxml2-dev \
-    zip unzip nodejs npm nginx
+    zip unzip nginx nodejs npm \
+    && apt-get clean
 
 # Install PHP extensions
 RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd
 
-# Install Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# Copy built app from Stage 1
+WORKDIR /var/www/html
+COPY --from=build /app .
 
-# Set working directory
-WORKDIR /var/www
-
-# Copy project files
-COPY . .
-
-# Install PHP dependencies
-RUN composer install --no-dev --optimize-autoloader
-
-# Install Node dependencies and build React
+# Install Node deps and build React
 RUN npm install && npm run build
 
-# Set permissions
-RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
+# Permissions
+RUN chown -R www-data:www-data /var/www/html/storage \
+    && chown -R www-data:www-data /var/www/html/bootstrap/cache
 
-# Copy Nginx config
+# Nginx config
 COPY docker/nginx.conf /etc/nginx/sites-available/default
-
-# Expose port
-EXPOSE 8080
 
 # Start script
 COPY docker/start.sh /start.sh
 RUN chmod +x /start.sh
 
+EXPOSE 8080
 CMD ["/start.sh"]
