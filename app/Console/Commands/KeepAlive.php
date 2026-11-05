@@ -12,7 +12,7 @@ class KeepAlive extends Command
 
     public function handle()
     {
-        $url = 'https://whistle-7qsn.onrender.com/';
+        $url = rtrim(config('app.url', 'https://whistle-lunv.onrender.com'), '/') . '/';
 
         try {
             $response = Http::get($url);
