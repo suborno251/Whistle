@@ -2,27 +2,13 @@
 
 cd /var/www/html
 
-# Normalize environment when running on Render
-if [[ -n "$RENDER" || -n "$RENDER_SERVICE_ID" ]]; then
-    APP_ENV="production"
-fi
-
-if [[ -n "$RENDER_EXTERNAL_URL" ]]; then
-    APP_URL="$RENDER_EXTERNAL_URL"
-elif [[ "$APP_URL" == *"onrender.com"* && "$APP_URL" == http://* ]]; then
-    APP_URL="${APP_URL/http:\/\//https:\/\/}"
-fi
-
-APP_URL=${APP_URL:-https://whistle-lunv.onrender.com}
-APP_ENV=${APP_ENV:-production}
-
 # Write Render's env vars into .env so Laravel can read them
 cat > .env << EOF
 APP_NAME=${APP_NAME:-Whistle}
-APP_ENV=${APP_ENV}
+APP_ENV=${APP_ENV:-production}
 APP_KEY=${APP_KEY}
 APP_DEBUG=${APP_DEBUG:-false}
-APP_URL=${APP_URL}
+APP_URL=${APP_URL:-https://whistle-lunv.onrender.com}
 
 LOG_CHANNEL=stderr
 LOG_LEVEL=debug
