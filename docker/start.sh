@@ -4,21 +4,33 @@ cd /var/www/html
 
 # Write Render's env vars into .env so Laravel can read them
 cat > .env << EOF
-APP_NAME=Whistle
+APP_NAME=${APP_NAME:-Whistle}
 APP_ENV=${APP_ENV:-production}
 APP_KEY=${APP_KEY}
 APP_DEBUG=${APP_DEBUG:-false}
-APP_URL=https://whistle-7qsn.onrender.com
+APP_URL=${APP_URL:-https://whistle-7qsn.onrender.com}
 
 LOG_CHANNEL=stderr
 LOG_LEVEL=debug
 
+CACHE_STORE=file
 CACHE_DRIVER=file
 FILESYSTEM_DISK=local
 QUEUE_CONNECTION=sync
 SESSION_DRIVER=file
 SESSION_LIFETIME=120
+
+DB_CONNECTION=${DB_CONNECTION:-sqlite}
+DB_HOST=${DB_HOST:-127.0.0.1}
+DB_PORT=${DB_PORT:-3306}
+DB_DATABASE=${DB_DATABASE:-whistle}
+DB_USERNAME=${DB_USERNAME:-root}
+DB_PASSWORD=${DB_PASSWORD:-}
 EOF
+
+# Ensure database directory and sqlite file exist with correct permissions
+touch /var/www/html/database/database.sqlite
+chown -R www-data:www-data /var/www/html/database /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/public
 
 # Clear any old cached config
 php artisan config:clear

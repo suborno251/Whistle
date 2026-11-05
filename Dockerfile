@@ -25,8 +25,8 @@ COPY --from=build /app .
 RUN npm install && npm run build
 
 # Permissions
-RUN chown -R www-data:www-data /var/www/html/storage \
-    && chown -R www-data:www-data /var/www/html/bootstrap/cache
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 755 /var/www/html
 
 # Nginx config
 COPY docker/nginx.conf /etc/nginx/sites-available/default
